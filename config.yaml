@@ -1,0 +1,4 @@
+settings:
+  threads: 4
+  capacity: 256
+  ttl: 100
