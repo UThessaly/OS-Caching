@@ -26,15 +26,16 @@ namespace caching
         
         using namespace std::chrono_literals;
 
-        std::chrono::seconds sleep_time(size % 2);
-        std::this_thread::sleep_for(sleep_time);
-        
-        if (auto response = m_cache.Get(request->GetCacheId()); response != nullptr)
+                if (auto response = m_cache.Get(request->GetCacheId()); response != nullptr)
         {
-            spdlog::info("Returned from Cache");
+            spdlog::info("{}: Returned from Cache", request->GetCacheId());
             return response;
         }
 
+        spdlog::warn("{}: Calculating Response ({}, {})", request->GetCacheId(), size, size % 10);
+        std::chrono::seconds sleep_time((size % 10));
+        std::this_thread::sleep_for(sleep_time);
+        spdlog::warn("{}: Calculated Response", request->GetCacheId());
         auto response = std::make_shared<Response>(request->GetCacheId());
         m_cache.Set(request->GetCacheId(), response, GetTTL());
         return response;
