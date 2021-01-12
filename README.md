@@ -79,11 +79,17 @@ So, for example:
 You can also do the same thing for docker, just a bit differently
 
 ```bash
-docker run --read-only -v /mount/directory:/mount/to -it caching_server --config=/mount/to/config/path --test=/mount/to/test/path
+docker run 
+        --read-only -v /mount/directory:/mount/to 
+        -it 
+        caching_server --config=/mount/to/config/path --test=/mount/to/test/path
 ```
 
 If `config.yaml` is in `/settings/config.yaml` and `test.yaml` is in `/settings/tests/test.yaml`, you would execute the following command:
 
 ```bash
-docker run --read-only -v /settings:/settings -it caching_server --config=/settings/config.yaml --test=/settings/tests/test.yaml
+docker run 
+        --read-only -v /settings:/settings 
+        -it 
+        caching_server --config=/settings/config.yaml --test=/settings/tests/test.yaml
 ```
