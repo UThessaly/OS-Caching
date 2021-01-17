@@ -1,15 +1,15 @@
 #pragma once
-#include <string>
 #include <chrono>
+#include <string>
 
-namespace caching { 
-    class Response { 
-        public:
-        Response(const std::string &data);
+namespace caching {
+class Response {
+ public:
+  Response(const std::string& data);
 
-        const std::string& GetData() const;
+  const std::string& GetData() const;
 
-        private:
-        std::string m_data;
-    };
-}
+ private:
+  std::string m_data;
+};
+}  // namespace caching
