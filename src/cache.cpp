@@ -7,7 +7,7 @@ Cache::Cache(std::size_t capacity) : m_capacity(capacity) {}
 
 std::shared_ptr<Response> Cache::Get(const std::string& key) {
   using namespace std::chrono_literals;
-  std::lock_guard<std::mutex> guard(m_mutex);
+  std::lock_guard guard(m_mutex);
   if (!m_cache.count(key)) {
     return nullptr;
   }
@@ -32,7 +32,7 @@ void Cache::Set(const std::string& key,
   auto ms = ttl + std::chrono::duration_cast<std::chrono::milliseconds>(
                       std::chrono::system_clock::now().time_since_epoch());
 
-  std::lock_guard<std::mutex> guard(m_mutex);
+  std::lock_guard guard(m_mutex);
   DeleteOldest();
   m_cache.insert_or_assign(key, std::make_tuple(ms, data));
 }

@@ -45,7 +45,7 @@ const std::chrono::milliseconds Server::GetTTL() const {
 }
 
 void Server::AddRequest(std::shared_ptr<Request> request) {
-  std::lock_guard<std::mutex> guard(m_request_mutex);
+  std::lock_guard guard(m_request_mutex);
   m_requests.push_back(request);
 }
 
